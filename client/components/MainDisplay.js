@@ -1,18 +1,13 @@
 import React from 'react';
-import { createTree } from '../helperfunctions/createTree';
-const MainDisplay = () => {
+import SideBar from './SideBar';
+import TreeDisplay from './TreeDisplay';
 
-  function handleCreateTree() {
-    const newBST = createTree();
-    console.log('newBST :', newBST.root);
-  }
+const MainDisplay = () => {
 
   return (
     <div>
-      <h3>MainDisplay</h3>
-      <button id='create-tree' onClick={() => handleCreateTree()}>
-        Create a new Binary Search Tree
-      </button>
+      <SideBar />
+      <TreeDisplay />
     </div>
   );
 }
