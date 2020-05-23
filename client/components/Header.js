@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <div>
-      <h3>Header</h3>
+      <h1>BST Visualizer</h1>
     </div>
   );
 }
