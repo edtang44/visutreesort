@@ -3,6 +3,12 @@ body {
   padding: 0;
 }
 
+.main-header {
+  font-size: 30px;
+  text-align: center;
+  background-color: blue;
+}
+
 .navbar {
   text-align: center;
   background-color: #1a1a1a;
@@ -127,14 +133,14 @@ body {
 
 .link {
   fill: none;
-  stroke: red;
-  stroke-width: 5px;
+  stroke: blue;
+  stroke-width: 1.5px;
 }
 
 .node circle {
-    fill: #fff;
-    stroke: red;
-    stroke-width: 6px;
+  fill: #fff;
+  stroke:blue;
+  stroke-width: 1.5px;
 }
 
 .node_hidden {
@@ -148,5 +154,5 @@ body {
 }
 
 .node text{
-   font: 2.5em sans-serif; 
+  font: 1.5em sans-serif; 
 }

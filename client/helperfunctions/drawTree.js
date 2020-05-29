@@ -5,7 +5,6 @@ import * as d3 from 'd3';
 
 function drawTree(data) {
 	// Set dimensions and margins for diagram
-	console.log('draw tree!!!!')
   let margin = {
     top: 80,
     bottom: 80
@@ -140,7 +139,7 @@ function drawTree(data) {
 
     // Update the node attributes and style
     nodeUpdate.select('circle.node')
-      .attr('r', 30)
+      .attr('r', 20)
       .style("fill", function(d) {
         return d._children ? "lightsteelblue" : "#fff";
       })

@@ -1,17 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import { createTree } from '../helperfunctions/createTree';
 const { UserContext } = require("../context/UserContext");
 import '../stylesheets/style.css';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const SideBar = () => {
   const [bst, setBst] = useState({});
-  const [numNodes, setNumNodes] = useState(0);
+  const [numNodes, setNumNodes] = useState(1);
   const { displayTree, toggleTree, addTree } = useContext(UserContext);
+  const classes = useStyles();
+
 
   function handleSubmit(e){
-    if (e.target.value < 51) {
-      setNumNodes(e.target.value);
-    } else setNumNodes(0)
+    if (e.target.value > 50) e.target.value = 50;
+    setNumNodes(e.target.value);
   }
 
   function removeTree() {
@@ -33,15 +44,15 @@ const SideBar = () => {
   }, [bst]);
 
   return (
-    <div>
-      <label htmlFor="numNodes">Number Nodes</label>
-      <input type="number" name="numNodes" value={numNodes} onChange={(e) => handleSubmit(e)} />
-      <button id='create-tree' onClick={() => {handleCreateTree()}}>
+    <div className={classes.root}>
+      <label htmlFor="numNodes">Number of Nodes (1-50)</label>
+      <input type="number" name="numNodes" value={numNodes} min="1" max="50" onChange={(e) => handleSubmit(e)} />
+      <Button variant="contained" color="primary" id='create-tree' onClick={() => {handleCreateTree()}}>
         Create a new Binary Search Tree
-      </button>
-      <button id='create-tree' onClick={() => {if (displayTree) toggleTree()}}>
+      </Button>
+      <Button variant="contained" color="primary" id='create-tree' onClick={() => {if (displayTree) toggleTree()}}>
         Hide Binary Search Tree
-      </button>
+      </Button>
     </div>
   );
 }
