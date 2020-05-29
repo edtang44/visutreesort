@@ -1,3 +1,3 @@
-# BST and Sorting Visualizer
+# Sorting and BST Visualizer
 
-A Binary Search Tree Traversal and Sorting Algorithm Visualizer
+A Sorting Algorithm and Binary Search Tree Traversal Visualizer 
