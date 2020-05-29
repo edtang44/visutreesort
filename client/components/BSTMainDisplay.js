@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import TreeDisplay from './TreeDisplay';
 import '../stylesheets/style.css';
 
-const MainDisplay = () => {
+const BSTMainDisplay = () => {
 
   return (
     <div>
@@ -14,4 +14,4 @@ const MainDisplay = () => {
   );
 }
  
-export default MainDisplay;
+export default BSTMainDisplay;
