@@ -15,7 +15,7 @@ const TreeDisplay = () => {
 
   return (
     <>
-    { displayTree && <svg id='d3tree'> </svg>}
+    { displayTree && <div id='d3tree'> </div>}
     </>
   );
 };

@@ -156,3 +156,10 @@ body {
 .node text{
   font: 1.5em sans-serif; 
 }
+
+div {margin-left: 40px;margin-top: 20px}
+text {fill: black;}
+rect {fill: blue;}
+.sorted {fill: red;}
+.min {fill: red;}
+.testing {fill: red;}

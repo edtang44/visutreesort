@@ -10,9 +10,9 @@ const Header = () => {
       <animated.div className="main-header" style={props}>
         <h4>Binary Search Tree and Sorting Algorithm Visualizer</h4>
       </animated.div>
-      <Link to="/bst">Binary Search Tree</Link>
-      <div></div>
       <Link to="/sort">Sorting Algorithms</Link>
+      <div></div>
+      <Link to="/bst">Binary Search Tree Traversal</Link>
     </>
   );
 }

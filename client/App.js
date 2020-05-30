@@ -11,8 +11,8 @@ const App = () => {
       <div className="AppLayout">
         <Switch>
           <Route exact path="/" component={ Header } />
-          <Route exact path="/bst" component={ BSTMainDisplay } />
           <Route exact path="/sort" component={ SortMainDisplay } />
+          <Route exact path="/bst" component={ BSTMainDisplay } />
         </Switch>
       </div>
     </UserContextProvider>

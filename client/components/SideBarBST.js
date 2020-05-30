@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SideBar = () => {
+const SideBarBST = () => {
   const [bst, setBst] = useState({});
   const [numNodes, setNumNodes] = useState(1);
   const { displayTree, toggleTree, addTree } = useContext(UserContext);
@@ -57,4 +57,4 @@ const SideBar = () => {
   );
 }
  
-export default SideBar;
+export default SideBarBST;
