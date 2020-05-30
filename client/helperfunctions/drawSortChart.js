@@ -1,39 +1,39 @@
 import * as d3 from 'd3';
 
 function drawSortChart(num) {
-  var count = Number(num) + 1,
-  durationTime = 2000/count,
-  array = d3.shuffle(d3.range(1,count)),
-  unsortedArray = [...array],
-  sortedArray = [],
-  stop = false,
-  steps = 0,
-  bogoShuffles = 0;
+  const count = Number(num) + 1;
+  const durationTime = 2000/count;
+  const array = d3.shuffle(d3.range(1,count));
+  const unsortedArray = [...array];
+  const sortedArray = [];
+  let stop = false;
+  let steps = 0;
+  let bogoShuffles = 0;
 
-  var margin = {top: 40, right: 40, bottom: 180, left: 40},
-  width = 960 - margin.left - margin.right,
-  height = 5000 - margin.top - margin.bottom;
+  const margin = {top: 40, right: 40, bottom: 180, left: 40};
+  const width = 960 - margin.left - margin.right;
+  const height = 5000 - margin.top - margin.bottom;
 
-  var barWidth = width/count;
+  const barWidth = width/count;
 
-  var x = d3.scaleLinear()
+  const x = d3.scaleLinear()
   .domain([0,count])
   .range([0, width]);
 
-  var svg = d3.select("#sortchart").append("svg")
+  const svg = d3.select("#sortchart").append("svg")
   .attr('id', 'currentChart')
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-  var rects = svg.append("g")
+  const rects = svg.append("g")
   .attr("transform", "translate(" + barWidth + ",2)")
   .selectAll("rect")
   .data(unsortedArray)
   .enter().append("rect")
 
-  var labels = svg.selectAll("text")
+  const labels = svg.selectAll("text")
   .data(unsortedArray)
   .enter().append("text")
 
