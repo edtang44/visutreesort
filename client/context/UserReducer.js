@@ -8,6 +8,10 @@ export default function reducer (state, action) {
       return {
         ...state, tree: action.payload
       };
+    case "TOGGLE_CHART":
+      return {
+        ...state, displayChart: !state.displayChart
+      };
   default:
       return state;
   }

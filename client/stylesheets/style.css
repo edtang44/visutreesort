@@ -158,8 +158,7 @@ body {
 }
 
 div {margin-left: 40px;margin-top: 20px}
-text {fill: black;}
-rect {fill: blue;}
-.sorted {fill: red;}
-.min {fill: red;}
-.testing {fill: red;}
+rect {fill: rgb(248, 201, 248);}
+.sorted {fill: purple;;}
+.min {fill: purple;;}
+.testing {fill: purple;}

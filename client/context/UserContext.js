@@ -4,6 +4,7 @@ export const UserContext = createContext(initialState);
 
 const initialState = {
   displayTree: false, 
+  displayChart: false,
   tree: {}
 }
 
@@ -22,12 +23,19 @@ export const UserContextProvider = props => {
       payload: obj
     });
   }
+  function toggleChart() {
+    dispatch({
+      type: 'TOGGLE_CHART',
+    });
+  }
   return (
     <UserContext.Provider value={{
       displayTree: state.displayTree,
+      displayChart: state.displayChart,
       tree: state.tree,
       toggleTree,
-      addTree
+      addTree, 
+      toggleChart
     }}>
       {props.children}
     </UserContext.Provider>
