@@ -53,7 +53,7 @@ const SortAlgoDisplay = () => {
         .attr("transform", function(d, i) {return "translate(" + (x(i) - barWidth) + ",0)"})
         .attr("width", barWidth *.9)
         .attr("height", function(d) {return d*barWidth/3})
-    }, [count, sortDisplay]);
+    }, [count, sortDisplay, time]);
 
   function reset() {
     unsortedArray = [...array];
@@ -71,8 +71,88 @@ const SortAlgoDisplay = () => {
         .attr("transform", function(d, i) {return "translate(" + (x(i-1)) + ", 0)"})
   }
 
+  function mergeSort() {
+    const mergeReps = (unsortedArray.length).toString(2).length + 1;
+    const mergeArrays = [[...unsortedArray], []];
+
+    for (let i=0; i<unsortedArray.length; i += 2) {
+        mergeArrays[1].push(mergeTwo([unsortedArray[i]], [unsortedArray[i+1]]))
+    }
+    for (let n=2; n<mergeReps; n++) {
+        mergeArrays[n] = [];
+        const unMerged = mergeArrays[n-1];
+        for (let i=0; i<unMerged.length; i += 2) {
+            mergeArrays[n].push(mergeTwo(unMerged[i], unMerged[i+1] ? unMerged[i+1] : []))
+        }
+    }
+    for (let i=1; i<mergeArrays.length; i++) {
+        mergeArrays[i] = d3.merge(mergeArrays[i])
+    }
+    mergeMove(0);
+
+    function mergeTwo(iArray, nArray) {
+        const newArray = [];
+        for (let i=0, n=0; i<iArray.length || n<nArray.length;) {
+            if (iArray[i] < nArray[n]) {
+                newArray.push(iArray[i++])
+            } else if (iArray[i] > nArray[n]) {
+                newArray.push(nArray[n++])
+            } else if (!(iArray[i])) {
+                newArray.push(nArray[n++])
+            } else if (!(nArray[n])) {
+                newArray.push(iArray[i++])
+            }
+        }
+        return newArray;
+    }
+
+    function mergeMove(j) {
+        const oldArray = mergeArrays[j];
+        const newArray = [...mergeArrays[j+1]];
+        const sortedArray = [];
+        moveStep(0);
+
+        function moveStep(n) {
+            if (stop) return stop = false;            
+            d3.selectAll("rect").attr("class", "")                
+
+            d3.select("#counter").html(++steps);
+            d3.select("#rect" + newArray[n]).attr("class", "testing")
+
+            sortedArray.push(newArray[n])
+            oldArray.shift()
+
+            rects.transition().duration(durationTime)
+                .attr("transform", function(d) {
+                    const xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : oldArray.indexOf(d) + sortedArray.length;
+                    return "translate(" + x(xVal - 1) + ",0)" 
+                })
+
+            labels
+                .classed("sorted", function(d) {
+                    return !mergeArrays[j + 2] && sortedArray.indexOf(d) == d - 1;
+                })
+                .transition().duration(durationTime)
+                .attr("transform", function(d) {
+                    const xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : oldArray.indexOf(d) + sortedArray.length;
+                    return "translate(" + x(xVal) + ",0)" 
+                })
+
+            d3.timeout(function() {
+                if (oldArray.length > 0) {
+                    moveStep(++n)
+                } else if (mergeArrays[j + 2]) {
+                    mergeMove(++j)
+                } else {
+                    rects.classed("testing", false)
+                }
+            }, durationTime);
+        }
+    }
+  }
+
   function insertionSort() {
-    var value = unsortedArray.shift();
+    const value = unsortedArray.shift();
     sortedArray.push(value);      
     reArrange(sortedArray.length-1);
 
@@ -102,9 +182,9 @@ const SortAlgoDisplay = () => {
   }
 
   function selectionSort() {
-    var min = count,
-        spliceIndex,
-        i = 0;
+    let min = count;
+    let spliceIndex;
+    let i = 0;
 
     function findMin() {
         if (stop) return stop = false;
@@ -140,7 +220,7 @@ const SortAlgoDisplay = () => {
 
             rects.transition().duration(durationTime * 4)
                 .attr("transform", function(d) {
-                    var xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : unsortedArray.indexOf(d) + sortedArray.length;
+                    const xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : unsortedArray.indexOf(d) + sortedArray.length;
                     return "translate(" + x(xVal - 1) + ",0)" 
                 })
 
@@ -148,7 +228,7 @@ const SortAlgoDisplay = () => {
                 .classed("sorted", function(d) {return sortedArray.indexOf(d) == d - 1;})
                 .transition().duration(durationTime * 4)
                 .attr("transform", function(d) {
-                    var xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : unsortedArray.indexOf(d) + sortedArray.length;
+                    const xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : unsortedArray.indexOf(d) + sortedArray.length;
                     return "translate(" + x(xVal) + ",0)" 
                 })
 
@@ -165,7 +245,6 @@ const SortAlgoDisplay = () => {
   }
 
   function bubbleSort() {
-    var sortedCount = 0;
 
     function sortPass(i) {
         if (!unsortedArray.length || stop) return stop = false
@@ -181,7 +260,7 @@ const SortAlgoDisplay = () => {
                     d3.select("#rect" + unsortedArray[i-1]).attr("class", "")                                            
                 }, durationTime);
 
-                var temp = unsortedArray[i-1];
+                const temp = unsortedArray[i-1];
                 unsortedArray[i-1] = unsortedArray[i];
                 unsortedArray[i] = temp;
 
@@ -209,87 +288,6 @@ const SortAlgoDisplay = () => {
         }
     }
     sortPass(1);
-  }
-
-  function mergeSort() {
-    var mergeReps = (unsortedArray.length).toString(2).length + 1;
-    var mergeArrays = [[...unsortedArray], []];
-
-    for (let i=0; i<unsortedArray.length; i += 2) {
-        mergeArrays[1].push(mergeTwo([unsortedArray[i]], [unsortedArray[i+1]]))
-    }
-    for (let n=2; n<mergeReps; n++) {
-        mergeArrays[n] = [];
-        var unMerged = mergeArrays[n-1];
-        for (let i=0; i<unMerged.length; i += 2) {
-            mergeArrays[n].push(mergeTwo(unMerged[i], unMerged[i+1] ? unMerged[i+1] : []))
-        }
-    }
-    for (let i=1; i<mergeArrays.length; i++) {
-        mergeArrays[i] = d3.merge(mergeArrays[i])
-    }
-    mergeMove(0);
-
-    function mergeTwo(iArray, nArray) {
-        var newArray = [];
-        for (var i=0, n=0; i<iArray.length || n<nArray.length;) {
-            if (iArray[i] < nArray[n]) {
-                newArray.push(iArray[i++])
-            } else if (iArray[i] > nArray[n]) {
-                newArray.push(nArray[n++])
-            } else if (!(iArray[i])) {
-                newArray.push(nArray[n++])
-            } else if (!(nArray[n])) {
-                newArray.push(iArray[i++])
-            }
-        }
-        return newArray;
-    }
-
-    function mergeMove(j) {
-        var oldArray = mergeArrays[j],
-            newArray = [...mergeArrays[j+1]],
-            sortedArray = [];
-
-        moveStep(0);
-
-        function moveStep(n) {
-            if (stop) return stop = false;            
-            d3.selectAll("rect").attr("class", "")                
-
-            d3.select("#counter").html(++steps);
-            d3.select("#rect" + newArray[n]).attr("class", "testing")
-
-            sortedArray.push(newArray[n])
-            oldArray.shift()
-
-            rects.transition().duration(durationTime)
-                .attr("transform", function(d) {
-                    var xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : oldArray.indexOf(d) + sortedArray.length;
-                    return "translate(" + x(xVal - 1) + ",0)" 
-                })
-
-            labels
-                .classed("sorted", function(d) {
-                    return !mergeArrays[j + 2] && sortedArray.indexOf(d) == d - 1;
-                })
-                .transition().duration(durationTime)
-                .attr("transform", function(d) {
-                    var xVal = sortedArray.indexOf(d) > -1 ? sortedArray.indexOf(d) : oldArray.indexOf(d) + sortedArray.length;
-                    return "translate(" + x(xVal) + ",0)" 
-                })
-
-            d3.timeout(function() {
-                if (oldArray.length > 0) {
-                    moveStep(++n)
-                } else if (mergeArrays[j + 2]) {
-                    mergeMove(++j)
-                } else {
-                    rects.classed("testing", false)
-                }
-            }, durationTime);
-        }
-    }
   }
 
   function slide(d, i) {
@@ -338,7 +336,7 @@ const SortAlgoDisplay = () => {
       <Button variant="contained" color="primary" id='stop' onClick={() => {stop = true}}>
         Stop
       </Button>
-      <Button variant="contained" color="primary" id='stop' onClick={() => {reset()}}>
+      <Button variant="contained" color="primary" id='merge-sort' onClick={() => {reset()}}>
         Reset
       </Button>
       <div></div>

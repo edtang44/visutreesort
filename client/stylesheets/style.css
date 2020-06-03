@@ -1,12 +1,17 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: rgb(149, 197, 241);
 }
 
 .main-header {
-  font-size: 30px;
-  text-align: center;
-  background-color: blue;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  margin-bottom: 2em;
+  color: #fff;
 }
 
 .navbar {
@@ -157,7 +162,7 @@ body {
   font: 1.5em sans-serif; 
 }
 
-div {margin-left: 40px;margin-top: 20px}
+div {text-align: center}
 rect {fill: rgb(248, 201, 248);}
 .sorted {fill: purple;;}
 .min {fill: purple;;}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring'
+import Button from '@material-ui/core/Button';
 import '../stylesheets/style.css';
 
 const Header = () => {
@@ -8,11 +9,14 @@ const Header = () => {
   return (
     <>
       <animated.div className="main-header" style={props}>
-        <h4>Binary Search Tree and Sorting Algorithm Visualizer</h4>
+        <h1>Binary Search Tree and Sorting Algorithm Visualizer</h1>
       </animated.div>
-      <Link to="/sort">Sorting Algorithms</Link>
-      <div></div>
-      <Link to="/bst">Binary Search Tree Traversal</Link>
+      <Button variant="outlined" size="large" color="primary" component={Link} to="/sort">
+        Sorting Algorithms
+      </Button>   
+      <Button variant="outlined" size="large" color="primary" component={Link} to="/bst">
+        Binary Search Tree Traversal
+      </Button>   
     </>
   );
 }
