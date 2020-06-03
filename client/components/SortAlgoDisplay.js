@@ -7,7 +7,7 @@ const SortAlgoDisplay = () => {
   const [count, setCount] = useState(21);
   const [time, setTime] = useState(2000);
   const [sortDisplay, setSortDisplay] = useState(false);
-  const [running, setRunning] = useState(false);
+  const [chartReady, setChartReady] = useState(false);
 
   let durationTime;
   const array = d3.shuffle(d3.range(1,count));
@@ -26,7 +26,7 @@ const SortAlgoDisplay = () => {
 
   useEffect(() => {
     removeChart();
-    durationTime = time/count;
+    durationTime = time/20;
     svg = d3.select("#sortchart").append("svg")
       .attr('id', 'currentChart')
       .attr("width", width + margin.left + margin.right)
@@ -326,7 +326,11 @@ const SortAlgoDisplay = () => {
     <div>
       <label htmlFor="numNodes">Change Number of Elements in Array (3-50)  </label>
       <input type="number" name="numElements" value={Number(count)- 1} min="3" max="50" onChange={handleChange} />
-      <Button variant="contained" color="primary" id='new-chart' onClick={() => {setSortDisplay(true)}}>
+      <Button variant="contained" color="primary" id='new-chart' 
+        onClick={() => {
+          setChartReady(true);
+          setSortDisplay(true);
+          }}>
         New Chart
       </Button>
       <label htmlFor="speed">Speed</label>
@@ -338,16 +342,16 @@ const SortAlgoDisplay = () => {
         Reset
       </Button>
       <div></div>
-      <Button variant="contained" color="primary" id='merge-sort' onClick={mergeSort}>
+      <Button variant="contained" color="primary" id='merge-sort' onClick={chartReady && mergeSort}>
         Merge Sort
       </Button>
-      <Button variant="contained" color="primary" id='insertion-sort' onClick={insertionSort}>
+      <Button variant="contained" color="primary" id='insertion-sort' onClick={chartReady && insertionSort}>
         Insertion Sort
       </Button>
-      <Button variant="contained" color="primary" id='selection-sort' onClick={selectionSort}>
+      <Button variant="contained" color="primary" id='selection-sort' onClick={chartReady && selectionSort}>
         Selection Sort
       </Button>
-      <Button variant="contained" color="primary" id='bubble-sort' onClick={bubbleSort}>
+      <Button variant="contained" color="primary" id='bubble-sort' onClick={chartReady && bubbleSort}>
         Bubble Sort
       </Button>
       <Button variant="contained" color="primary" id='heap-sort'>
