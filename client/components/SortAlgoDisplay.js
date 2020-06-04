@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as d3 from 'd3';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const SortAlgoDisplay = () => {

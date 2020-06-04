@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
-import BSTMainDisplay from './components/BSTMainDisplay';
-import SortMainDisplay from './components/SortMainDisplay';
+import SortAlgoDisplay from './components/SortAlgoDisplay';
+import TreeDisplay from './components/TreeDisplay';
 const { UserContextProvider } = require("./context/UserContext");
 
 const App = () => {
@@ -11,8 +11,8 @@ const App = () => {
       <div className="AppLayout">
         <Switch>
           <Route exact path="/" component={ Header } />
-          <Route exact path="/sort" component={ SortMainDisplay } />
-          <Route exact path="/bst" component={ BSTMainDisplay } />
+          <Route exact path="/sort" component={ SortAlgoDisplay } />
+          <Route exact path="/bst" component={ TreeDisplay } />
         </Switch>
       </div>
     </UserContextProvider>
