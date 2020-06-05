@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { createTree } from '../helperfunctions/createTree';
 import drawTree from '../helperfunctions/drawTree';
-import { resetTraversal, bfs, preOrder, inOrder, postOrder } from '../helperfunctions/bst-traversal';
+import { bfs, preOrder, inOrder, postOrder } from '../helperfunctions/bst-traversal';
 import '../stylesheets/style.css';
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +58,10 @@ const TreeDisplay = () => {
 
   useEffect(
     () => {
-       if (Object.entries(bst).length > 0) drawTree(bst.root);
+       if (Object.entries(bst).length > 0) {
+        removeTree();
+        drawTree(bst.root);
+       }
     }, [bst]
   );
 
