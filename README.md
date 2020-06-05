@@ -1,3 +1,3 @@
 # Sorting and BST Visualizer
 
-A Tool for Visualizing Sorting Algorithms and Binary Search Tree Traversals 
+A visualization tool for various sorting algorithms and binary search tree traversals 
