@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 import Button from '@material-ui/core/Button';
 
@@ -309,12 +309,6 @@ const SortAlgoDisplay = () => {
       </Button>
       <Button variant="contained" color="primary" id='bubble-sort' onClick={chartReady && bubbleSort}>
         Bubble Sort
-      </Button>
-      <Button variant="contained" color="primary" id='heap-sort'>
-        Heap Sort
-      </Button>
-      <Button variant="contained" color="primary" id='quick-sort'>
-        Quick Sort
       </Button>
     </div>
     { sortDisplay && <div id='sortchart'> </div>}
