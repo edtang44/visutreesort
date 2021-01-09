@@ -1,22 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring'
-import Button from '@material-ui/core/Button';
 import '../stylesheets/style.css';
+import { Flex, Heading, Button, ButtonGroup } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/core';
 
 const Header = () => {
   const props = useSpring({opacity: 1, from: {opacity: 0}})
   return (
     <>
-      <animated.div className="main-header" style={props}>
-        <h1>Binary Search Tree and Sorting Algorithm Visualizer</h1>
+      <Flex w="100%" h="100px"/>
+      <animated.div style={props}>
+        <Heading as="h1" size="2xl"> 
+          VisuTreeSort 
+        </Heading>
+        <Text as="i" fontSize="30px">visualizing binary tree traversals and sorting algorithms through animation</Text>
       </animated.div>
-      <Button variant="outlined" size="large" color="primary" component={Link} to="/sort">
-        Sorting Algorithms
-      </Button>   
-      <Button variant="outlined" size="large" color="primary" component={Link} to="/bst">
-        Binary Search Tree Traversal
-      </Button>   
+      <Flex w="100%" h="100px"/>
+      <ButtonGroup colorScheme="blue" size="lg" variant="outline" spacing="6">
+        <Button as={Link} to="/bst">
+          Binary Tree Traversal
+        </Button>   
+        <Button as={Link} to="/sort">
+          Sorting Algorithms
+        </Button>   
+      </ButtonGroup>
     </>
   );
 }
