@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import ReactModal from 'react-modal';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { Link as ChakraLink } from '@chakra-ui/react';
 import { createTree } from '../helperfunctions/createTree';
 import drawTree from '../helperfunctions/drawTree';
-import { bfs, preOrder, inOrder, postOrder } from '../helperfunctions/bst-traversal';
+import removeTree from '../helperfunctions/removeTree';
+import { resetTraversal, bfs, preOrder, inOrder, postOrder } from '../helperfunctions/bst-traversal';
 import '../stylesheets/style.css';
 
 const useStyles = makeStyles(theme => ({
@@ -16,32 +20,34 @@ const useStyles = makeStyles(theme => ({
 
 const TreeDisplay = () => {
   const [bst, setBst] = useState({});
-  const [numNodes, setNumNodes] = useState(1);
+  const [numNodes, setNumNodes] = useState(10);
   const [displayTree, setDisplayTree] = useState(false);
+  const [error, setError] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const svgRef = useRef(null);
   const classes = useStyles();
 
-  function handleSubmit(e){
-    if (e.target.value > 50) e.target.value = 50;
-    setNumNodes(e.target.value);
+  function handleSubmit(e) {
+    if (e.target.value < 50 || e.target.value > 1) {
+      setNumNodes(e.target.value);
+    } 
   }
 
-  function removeTree() {
-    const currentTree = document.querySelector('#currentTree');
-    if (currentTree) {
-      currentTree.remove();
-    }
-  }
-  
   function handleCreateTree() {
-    removeTree();
-    if (!displayTree) setDisplayTree(true);
-    const newBST = createTree(numNodes);
-    drawTree(newBST.root);
-    setBst(newBST);
+    if (numNodes < 50 && numNodes > 0) {
+      removeTree();
+      if (!displayTree) setDisplayTree(true);
+      const newBST = createTree(numNodes);
+      drawTree(svgRef, newBST.root);
+      setBst(newBST);
+    } else {
+        setNumNodes(10);
+        console.log('error');
+      }
   }
 
   function handlePreOrder() {
-    preOrder(bst);
+    preOrder(bst);('')
   }
 
   function handlePostOrder() {
@@ -56,42 +62,115 @@ const TreeDisplay = () => {
     bfs(bst);
   }
 
+  function handleOpenModal() {
+    setShowModal(true);
+  }
+  
+  function handleCloseModal() {
+    setShowModal(false);
+  }
+
   useEffect(
     () => {
        if (Object.entries(bst).length > 0) {
         removeTree();
-        drawTree(bst.root);
+        drawTree(svgRef, bst.root);
        }
     }, [bst]
   );
 
   return (
-    <div>
     <div className={classes.root}>
-      <label htmlFor="numNodes">Number of Nodes (1-50)</label>
-      <input type="number" name="numNodes" value={numNodes} min="1" max="50" onChange={(e) => handleSubmit(e)} />
-      <Button variant="contained" color="primary" id='create-tree' onClick={() => {handleCreateTree()}}>
-        Create a new Binary Search Tree
-      </Button>
-      <Button variant="contained" color="primary" id='create-tree' onClick={() => {if (displayTree) setDisplayTree(false)}}>
-        Hide Binary Search Tree
-      </Button>
-      <div></div>
-      <Button variant="contained" color="primary" id="preorder" onClick={() => handlePreOrder()}>
-        PreOrder
-      </Button>
-      <Button variant="contained" color="primary" id="postorder" onClick={() => handlePostOrder()}>
-        PostOrder
-      </Button>
-      <Button variant="contained" color="primary" id="inorder" onClick={() => handleInOrder()}>
-        InOrder
-      </Button>
-      <Button variant="contained" color="primary" id="bfs" onClick={() => handleBFS()}>
-        BFS
-      </Button>
-    </div>
-       {displayTree && <div id='d3tree'>
-      </div>}
+      {!displayTree &&
+      (<> 
+      <Flex w="100%" h="100px"/> 
+      <Center w="100%" h="140px">
+        <Box w="60%" h="140px">
+          <Heading as="h1" size="lg">Welcome to our binary tree traversal visualizer!</Heading>
+          <Heading as="h1" size="lg">To begin, please enter the number of nodes you would like in your binary tree</Heading>
+        </Box>
+      </Center>
+      </>)}
+      {displayTree &&
+      (<> 
+      <Flex w="100%" h="50px"/> 
+      <Center w="100%" h="50px">
+        <Box w="70%" h="50px">
+          <Heading as="h1" size="lg">Now choose a type of binary tree traversal</Heading>
+        </Box>
+      </Center>
+      </>)}
+      <Center>
+        {!displayTree && <Text fontSize="xl">Number of Nodes (1-50)</Text>}
+        {!displayTree && <Input autoFocus fontSize="xl" width="14" type="number" name="numNodes" value={numNodes} min="1" max="50" onChange={(e) => handleSubmit(e)} />}
+      </Center>
+
+      <ButtonGroup colorScheme="blue" size="lg" variant="outline" spacing="6">
+        {!displayTree && <Button id='create-tree' onClick={() => {handleCreateTree()}}>
+          Create Binary Tree
+        </Button>}
+      </ButtonGroup>
+
+      <ButtonGroup colorScheme="blue" size="lg" variant="outline" spacing="6">
+        {displayTree && <Button onClick={handlePreOrder}>
+          PreOrder
+        </Button>}
+        {displayTree && <Button onClick={handlePostOrder}>
+          PostOrder
+        </Button>}
+        {displayTree && <Button onClick={handleInOrder}>
+          InOrder
+        </Button>}
+        {displayTree && <Button onClick={handleBFS}>
+          Breadth First Order 
+        </Button>}
+        {displayTree && <Button color="primary" id='create-tree' onClick={() => {resetTraversal()}}>
+          Reset
+        </Button>}
+        {displayTree && <Button color="primary" id='create-tree' onClick={() => {setDisplayTree(false)}}>
+           New Tree
+        </Button>}
+        {displayTree && <Button color="primary" id='create-tree'  as={Link} to="/">
+           Main Menu
+        </Button>}
+      </ButtonGroup>
+      <div>
+        {displayTree && (
+        <>
+          <ChakraLink  size="lg" variant="outline" spacing="6" onClick={handleOpenModal}>Click here for more about traversal types</ChakraLink >
+          <ReactModal 
+            isOpen={showModal}
+            contentLabel="Tree Traversal Explanations"
+          >
+            <button onClick={handleCloseModal}>Close</button>
+            <Text></Text>
+            &nbsp;
+            &nbsp;
+            <Text>Preorder Traversal:</Text>
+            <Text>1. Visit root</Text>
+            <Text>2. Traverse left subtree by recursively calling Preorder function</Text>
+            <Text>3. Traverse right subtree by recursively calling Preorder function</Text>
+            &nbsp;
+            <Text>Postorder Traversal</Text>
+            <Text>1. Traverse left subtree by recursively calling Postorder function</Text>
+            <Text>2. Traverse right subtree by recursively calling Postorder function</Text>
+            <Text>3. Visit root</Text>
+            &nbsp;
+            <Text>Inorder Traversal:</Text>
+            <Text>1. Traverse left subtree by recursively calling Inorder function</Text>
+            <Text>2. Visit root</Text>
+            <Text>3. Traverse right subtree by recursively calling Inorder function</Text>
+            &nbsp;
+            <Text>Breadth First Order Traversal:</Text>
+            <Text>Visit every node on a level before going to another level</Text>
+
+          </ReactModal>
+           </>)}
+      </div>
+      
+        {/* {displayTree && <Text fontSize="2xl">{`${traversalType} Traversal`}</Text>} */}
+        {displayTree && <div ref={svgRef}>
+        </div>}
     </div>
   );
 }
