@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-function drawTree(data) {
+function drawTree(ref, data) {
   let margin = {
     top: 80,
     bottom: 80
@@ -8,7 +8,7 @@ function drawTree(data) {
   let width = 1000;
   let height = 800 - margin.top - margin.bottom;
 
-  let svg = d3.select("#d3tree").append("svg")
+  let svg = d3.select(ref.current).append("svg")
     .attr('id', 'currentTree')
     .attr("width", "100%")
     .attr("height", height + margin.top + margin.bottom)
