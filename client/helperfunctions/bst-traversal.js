@@ -28,8 +28,6 @@ function visitElement(element, animFactor) {
 }
 
 function preOrder(data) {
-  resetTraversal();
-
   const stack = [];
   let animFactor = 0;
   stack.push(data.root);
@@ -63,7 +61,6 @@ function inHelperFunc(data){
 }
 
 function inOrder(data){
-  resetTraversal();
   const array = inHelperFunc(data);
   const sortedArray = array.sort((a,b) => a.value - b.value);
   let animFactor = 0;
@@ -94,7 +91,6 @@ function postHelperFunc(data){
 }
 
 function postOrder(data){
-  resetTraversal();
   const array = postHelperFunc(data);
   let animFactor = 0;
 
@@ -105,8 +101,6 @@ function postOrder(data){
 }
 
 function bfs(data) {
-  resetTraversal();
-
   let queue = [];
   let animFactor = 0;
   queue.push(data.root);
