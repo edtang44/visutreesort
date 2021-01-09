@@ -1,5 +1,5 @@
 {
-  "homepage": "https://edtang44.github.io/sortbstvisualizer",
+  "homepage": "https://edtang44.github.io/visutreesort",
   "name": "bstvisualizer",
   "version": "1.0.0",
   "description": "",
@@ -15,13 +15,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edtang44/bstvisualizer.git"
+    "url": "git+https://github.com/edtang44/visutreesort.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/edtang44/bstvisualizer/issues"
+    "url": "https://github.com/edtang44/visutreesort/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
