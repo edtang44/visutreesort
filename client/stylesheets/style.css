@@ -168,16 +168,16 @@ div {
   text-align: center;
 }
 rect {
-  fill: rgb(248, 201, 248);
+  fill: rgb(83, 80, 252);
 }
 .sorted {
-  fill: purple;
+  fill: rgb(0, 23, 128);
 }
 .min {
-  fill: purple;
+  fill: rgb(0, 23, 128);
 }
 .testing {
-  fill: purple;
+  fill: rgb(0, 23, 128);
 }
 
 .modal {
