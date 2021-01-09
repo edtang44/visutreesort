@@ -20,3 +20,5 @@ const App = () => {
     </React.Suspense>
   );
 }
+ 
+export default App;
