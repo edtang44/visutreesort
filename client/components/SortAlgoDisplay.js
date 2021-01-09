@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import { Heading, Box, Center, Input, Flex, Square, Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const SortAlgoDisplay = () => {
   const [count, setCount] = useState(21);
@@ -280,38 +282,43 @@ const SortAlgoDisplay = () => {
   return (
     <>
     <div>
-      <label htmlFor="numNodes">Number of Elements (3-50)  </label>
-      <input type="number" name="numElements" value={Number(count)- 1} min="3" max="50" onChange={handleChange} />
-      <Button variant="contained" color="primary" id='new-chart' 
+      <Flex alignItems="center" justifyContent="center">
+      <Text fontSize="xl">Number of Elements (3-50)</Text>
+      <Input autoFocus fontSize="xl" width="14" type="number" name="numElements" value={Number(count)- 1} min="3" max="50" onChange={handleChange} />
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6"
         onClick={() => {
           setChartReady(true);
           setSortDisplay(true);
           }}>
         New Chart
       </Button>
+      </Flex>
       <label htmlFor="speed">Speed</label>
       <input type="range" min="10" max="100" id="speed" name="speed" value={100000/time} onChange={handleChangeSpeed}/>
-      <Button variant="contained" color="primary" id='stop' onClick={() => {stop = true}}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={() => {stop = true}}>
         Stop
       </Button>
-      <Button variant="contained" color="primary" id='merge-sort' onClick={() => {reset()}}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={() => {reset()}}>
         Reset
       </Button>
       <div></div>
-      <Button variant="contained" color="primary" id='merge-sort' onClick={chartReady && mergeSort}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && mergeSort}>
         Merge Sort
       </Button>
-      <Button variant="contained" color="primary" id='insertion-sort' onClick={chartReady && insertionSort}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && insertionSort}>
         Insertion Sort
       </Button>
-      <Button variant="contained" color="primary" id='selection-sort' onClick={chartReady && selectionSort}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && selectionSort}>
         Selection Sort
       </Button>
-      <Button variant="contained" color="primary" id='bubble-sort' onClick={chartReady && bubbleSort}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && bubbleSort}>
         Bubble Sort
       </Button>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" as={Link} to="/">
+        Main Menu
+      </Button>
     </div>
-    { sortDisplay && <div id='sortchart'> </div>}
+    { sortDisplay && <div alignItems="center" id='sortchart'> </div>}
     </>
   );
 }
