@@ -16,7 +16,7 @@ const SortAlgoDisplay = () => {
   let sortedArray = [];
   let stop = false;
   let steps = 0;
-  let margin = {top: 40, right: 40, bottom: 180, left: 40},
+  let margin = {top: 40, right: 0, bottom: 180, left: 250},
     width = 960 - margin.left - margin.right,
     height = 5000 - margin.top - margin.bottom;
   let barWidth = width/count;
