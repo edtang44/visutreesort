@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactModal from 'react-modal';
+import { Input, Flex, Text, Button } from '@chakra-ui/react';
+import { Link as ChakraLink } from '@chakra-ui/react';
 import * as d3 from 'd3';
-// import Button from '@material-ui/core/Button';
-import { Heading, Box, Center, Input, Flex, Square, Text, Button, ButtonGroup } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const SortAlgoDisplay = () => {
   const [count, setCount] = useState(21);
   const [time, setTime] = useState(2000);
   const [sortDisplay, setSortDisplay] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [chartReady, setChartReady] = useState(false);
 
   let durationTime;
@@ -279,6 +281,14 @@ const SortAlgoDisplay = () => {
     console.log('time', time)
   }
 
+  function handleOpenModal() {
+    setShowModal(true);
+  }
+  
+  function handleCloseModal() {
+    setShowModal(false);
+  }
+
   return (
     <>
     <div>
@@ -302,7 +312,11 @@ const SortAlgoDisplay = () => {
         Reset
       </Button>
       <div></div>
-      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && mergeSort}>
+      <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={() => {
+        if (chartReady) {
+          mergeSort();
+        }
+        }}>
         Merge Sort
       </Button>
       <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={chartReady && insertionSort}>
@@ -318,6 +332,39 @@ const SortAlgoDisplay = () => {
         Main Menu
       </Button>
     </div>
+    <div>
+        <>
+          <ChakraLink  size="lg" variant="outline" spacing="6" onClick={handleOpenModal}>Click here for more about sorting algorithms</ChakraLink >
+          <ReactModal 
+            isOpen={showModal}
+            contentLabel="Sorting Algorithms Explanations"
+          >
+            <button onClick={handleCloseModal}>Close</button>
+            <Text></Text>
+            &nbsp;
+            &nbsp;
+            <Text>Merge Sort:</Text>
+            <Text>Best: O(nlog(n))</Text>
+            <Text>Avg: O(nlog(n))</Text>
+            <Text>Worst: O(nlog(n))</Text>
+            &nbsp;
+            <Text>Insertion Sort:</Text>
+            <Text>Best: O(n)</Text>
+            <Text>Avg: O(n^2)</Text>
+            <Text>Worst: O(n^2)</Text>
+            &nbsp;
+            <Text>Selection Sort:</Text>
+            <Text>Best: O(n^2)</Text>
+            <Text>Avg: O(n^2)</Text>
+            <Text>Worst: O(n^2)</Text>
+            &nbsp;
+            <Text>Bubble Sort:</Text>
+            <Text>Best: O(n)</Text>
+            <Text>Avg: O(n^2)</Text>
+            <Text>Worst: O(n^2)</Text>
+          </ReactModal>
+           </>
+      </div>
     { sortDisplay && <div alignItems="center" id='sortchart'> </div>}
     </>
   );
