@@ -86,7 +86,7 @@ const TreeDisplay = () => {
       <Flex w="100%" h="100px"/> 
       <Center w="100%" h="140px">
         <Box w="60%" h="140px">
-          <Heading as="h1" size="lg">Welcome to our binary tree traversal visualizer!</Heading>
+          <Heading as="h1" size="lg">Welcome to our binary search tree traversal visualizer!</Heading>
           <Heading as="h1" size="lg">To begin, please enter the number of nodes you would like in your binary tree</Heading>
         </Box>
       </Center>
@@ -96,7 +96,7 @@ const TreeDisplay = () => {
       <Flex w="100%" h="50px"/> 
       <Center w="100%" h="50px">
         <Box w="70%" h="50px">
-          <Heading as="h1" size="lg">Now choose a type of binary tree traversal</Heading>
+          <Heading as="h1" size="lg">Now choose a type of binary search tree traversal</Heading>
         </Box>
       </Center>
       </>)}
@@ -107,7 +107,7 @@ const TreeDisplay = () => {
 
       <ButtonGroup colorScheme="blue" size="lg" variant="outline" spacing="6">
         {!displayTree && <Button id='create-tree' onClick={() => {handleCreateTree()}}>
-          Create Binary Tree
+          Create Binary Search Tree
         </Button>}
       </ButtonGroup>
 
