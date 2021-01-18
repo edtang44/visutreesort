@@ -96,7 +96,7 @@ const TreeDisplay = () => {
       <Flex w="100%" h="50px"/> 
       <Center w="100%" h="50px">
         <Box w="70%" h="50px">
-          <Heading as="h1" size="lg">Now choose a type of binary search tree traversal</Heading>
+          <Heading as="h1" size="lg">Now choose a type of binary tree traversal</Heading>
         </Box>
       </Center>
       </>)}
