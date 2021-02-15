@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Stack, VStack, Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { VStack, Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { createTree } from '../helperfunctions/createTree';
 import drawTree from '../helperfunctions/drawTree';
@@ -80,7 +80,7 @@ const TreeDisplay = () => {
   );
 
   return (
-    <div className={classes.root}>
+    <div>
       <VStack w="100%" h="100px" spacing="75px">
       {!displayTree &&
       (<> 
@@ -111,7 +111,7 @@ const TreeDisplay = () => {
       </ButtonGroup>
       </VStack>
 
-      <Stack direction={['column', 'column', 'row', 'row']} justify="center">
+      <Flex direction={['column', 'column', 'row', 'row']} justify="center">
         {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handlePreOrder}>
           PreOrder
         </Button>}
@@ -133,7 +133,7 @@ const TreeDisplay = () => {
         {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" id='create-tree'  as={Link} to="/">
            Main Menu
         </Button>}
-      </Stack>
+      </Flex>
       <div>
         {displayTree && (
         <>
