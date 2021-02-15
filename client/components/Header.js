@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {useSpring, animated} from 'react-spring'
+import { useSpring, animated } from 'react-spring'
 import '../stylesheets/style.css';
 import { VStack, Flex, Heading, Button } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/core';
 
 const Header = () => {
-  const props = useSpring({opacity: 1, from: {opacity: 0}})
+  const props = useSpring({opacity: 1, from: {opacity: 0}, config: { duration: 1500 }})
   return (
     <>
       <VStack marginTop="100px" w="100%" h="100px" spacing="75px">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
+import { useSpring, animated } from 'react-spring'
 import { makeStyles } from '@material-ui/core/styles';
 import { VStack, Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
@@ -25,7 +26,7 @@ const TreeDisplay = () => {
   const [error, setError] = useState({});
   const [showModal, setShowModal] = useState(false);
   const svgRef = useRef(null);
-  const classes = useStyles();
+  const props = useSpring({opacity: 1, from: {opacity: 0}, config: { duration: 1500 }})
 
   function handleSubmit(e) {
     if (e.target.value < 50 || e.target.value > 1) {
@@ -83,18 +84,19 @@ const TreeDisplay = () => {
     <div>
       <VStack w="100%" h="100px" spacing="80px">
       {!displayTree &&
-      (<> 
-      <Center marginTop="75px" w="100%" h="140px">
-        <Box w="800px" h="140px">
-          <Heading as="h1" size="xl">Welcome to our BST traversal visualizer!</Heading>
-          <Text as="i" fontSize="28px">To begin, please enter the number of nodes you would like in your binary search tree</Text>
-        </Box>
-      </Center>
-      </>)}
+      (<animated.div style={props}>
+        <Center marginTop="75px" w="100%" h="140px">
+          <Box w="800px" h="140px">
+            <Heading as="h1" size="xl">Welcome to our BST traversal visualizer!</Heading>
+            <Text as="i" fontSize="28px">To begin, please enter the number of nodes you would like in your binary search tree</Text>
+          </Box>
+        </Center>
+      </animated.div>
+      )}
       {displayTree &&
       (<> 
-      <Center w="100%" h="50px">
-        <Box w="70%" h="50px">
+      <Center marginTop="20px" w="100%" h="50px">
+        <Box w="800px" h="50px">
           <Heading as="h1" size="lg">Now choose a type of binary tree traversal</Heading>
         </Box>
       </Center>
