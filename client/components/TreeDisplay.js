@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { Stack, VStack, Heading, Box, Center, Input, Flex, Text, Button, ButtonGroup } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
 import { createTree } from '../helperfunctions/createTree';
 import drawTree from '../helperfunctions/drawTree';
@@ -81,10 +81,10 @@ const TreeDisplay = () => {
 
   return (
     <div className={classes.root}>
+      <VStack w="100%" h="100px" spacing="75px">
       {!displayTree &&
       (<> 
-      <Flex w="100%" h="100px"/> 
-      <Center w="100%" h="140px">
+      <Center marginTop="100px" w="100%" h="140px">
         <Box w="60%" h="140px">
           <Heading as="h1" size="lg">Welcome to our binary search tree traversal visualizer!</Heading>
           <Heading as="h1" size="lg">To begin, please enter the number of nodes you would like in your binary search tree</Heading>
@@ -93,7 +93,6 @@ const TreeDisplay = () => {
       </>)}
       {displayTree &&
       (<> 
-      <Flex w="100%" h="50px"/> 
       <Center w="100%" h="50px">
         <Box w="70%" h="50px">
           <Heading as="h1" size="lg">Now choose a type of binary tree traversal</Heading>
@@ -110,30 +109,31 @@ const TreeDisplay = () => {
           Create Binary Search Tree
         </Button>}
       </ButtonGroup>
+      </VStack>
 
-      <ButtonGroup colorScheme="blue" size="lg" variant="outline" spacing="6">
-        {displayTree && <Button onClick={handlePreOrder}>
+      <Stack direction={['column', 'column', 'row', 'row']} justify="center">
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handlePreOrder}>
           PreOrder
         </Button>}
-        {displayTree && <Button onClick={handlePostOrder}>
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handlePostOrder}>
           PostOrder
         </Button>}
-        {displayTree && <Button onClick={handleInOrder}>
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handleInOrder}>
           InOrder
         </Button>}
-        {displayTree && <Button onClick={handleBFS}>
-          Breadth First Order 
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handleBFS}>
+          Breadth First 
         </Button>}
-        {displayTree && <Button color="primary" id='create-tree' onClick={() => {resetTraversal()}}>
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" id='create-tree' onClick={() => {resetTraversal()}}>
           Reset
         </Button>}
-        {displayTree && <Button color="primary" id='create-tree' onClick={() => {setDisplayTree(false)}}>
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" id='create-tree' onClick={() => {setDisplayTree(false)}}>
            New Tree
         </Button>}
-        {displayTree && <Button color="primary" id='create-tree'  as={Link} to="/">
+        {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" id='create-tree'  as={Link} to="/">
            Main Menu
         </Button>}
-      </ButtonGroup>
+      </Stack>
       <div>
         {displayTree && (
         <>
