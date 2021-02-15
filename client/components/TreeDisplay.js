@@ -81,13 +81,13 @@ const TreeDisplay = () => {
 
   return (
     <div>
-      <VStack w="100%" h="100px" spacing="75px">
+      <VStack w="100%" h="100px" spacing="80px">
       {!displayTree &&
       (<> 
-      <Center marginTop="100px" w="100%" h="140px">
-        <Box w="60%" h="140px">
-          <Heading as="h1" size="lg">Welcome to our binary search tree traversal visualizer!</Heading>
-          <Heading as="h1" size="lg">To begin, please enter the number of nodes you would like in your binary search tree</Heading>
+      <Center marginTop="75px" w="100%" h="140px">
+        <Box w="800px" h="140px">
+          <Heading as="h1" size="xl">Welcome to our BST traversal visualizer!</Heading>
+          <Text as="i" fontSize="28px">To begin, please enter the number of nodes you would like in your binary search tree</Text>
         </Box>
       </Center>
       </>)}
@@ -111,7 +111,7 @@ const TreeDisplay = () => {
       </ButtonGroup>
       </VStack>
 
-      <Flex direction={['column', 'column', 'row', 'row']} justify="center">
+      <Flex direction='row' flexWrap="wrap" justify="center">
         {displayTree && <Button colorScheme="blue" size="lg" variant="outline" spacing="6" onClick={handlePreOrder}>
           PreOrder
         </Button>}
