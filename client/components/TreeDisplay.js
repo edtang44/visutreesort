@@ -86,9 +86,9 @@ const TreeDisplay = () => {
       {!displayTree &&
       (<animated.div style={props}>
         <Center marginTop="75px" w="100%" h="140px">
-          <Box w="800px" h="140px">
-            <Heading as="h1" size="xl">Welcome to our BST traversal visualizer!</Heading>
-            <Text as="i" fontSize="28px">To begin, please enter the number of nodes you would like in your binary search tree</Text>
+          <Box w={['400px', '400px', '700px', '700px']} h="140px">
+            <Heading as="h1" fontSize="4xl">Welcome to our BST traversal visualizer!</Heading>
+            <Text as="i" fontSize="2xl">To begin, please enter the number of nodes you would like in your binary search tree</Text>
           </Box>
         </Center>
       </animated.div>
