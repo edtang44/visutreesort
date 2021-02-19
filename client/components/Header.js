@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring'
 import '../stylesheets/style.css';
-import { VStack, Flex, Heading, Button } from '@chakra-ui/react';
+import { VStack, Flex, Center, Button } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/core';
 
 const Header = () => {
@@ -11,10 +11,10 @@ const Header = () => {
     <>
       <VStack marginTop="100px" w="100%" h="100px" spacing="75px">
       <animated.div style={props}>
-        <Heading as="h1" size="2xl"> 
-          VisuTreeSort 
-        </Heading>
-        <Text as="i" fontSize="30px">visualizing binary tree traversals and sorting algorithms through animation</Text>
+      <Center>
+        <img className="logo" src="https://i.ibb.co/7nzFfyW/visutreesortlogofinal.png" alt="" />
+      </Center>
+      <Text as="i" fontSize="30px">visualizing binary tree traversals and sorting algorithms through animation</Text>
       </animated.div>
       <Flex w="100%" h="100px"/>
       <Flex direction={['column', 'column', 'row', 'row']} justify="center">
