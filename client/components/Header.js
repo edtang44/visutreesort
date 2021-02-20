@@ -9,7 +9,7 @@ const Header = () => {
   const props = useSpring({opacity: 1, from: {opacity: 0}, config: { duration: 1500 }})
   return (
     <>
-      <VStack marginTop="100px" w="100%" h="100px" spacing="75px">
+      <VStack marginTop="25vh" w="100%" h="100px" spacing="75px">
       <animated.div style={props}>
       <Center>
         <img className="logo" src="https://i.ibb.co/7nzFfyW/visutreesortlogofinal.png" alt="" />
